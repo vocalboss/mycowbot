@@ -1,0 +1,2 @@
+# mycowbot
+openclaw (clawdbot) workspace
