@@ -1,0 +1,33 @@
+# OpenClaw config template for this repository
+# NOTE: Do NOT commit secrets. Use environment variables or a separate secrets manager.
+
+providers:
+  perplexity:
+    # Public base URL for Perplexity API
+    baseUrl: "https://api.perplexity.ai"
+    # IMPORTANT: don't put your key here. Set `OPENCLAW_PERPLEXITY_API_KEY` instead.
+    # Example: export OPENCLAW_PERPLEXITY_API_KEY="pplx-..."
+    apiKey: "${OPENCLAW_PERPLEXITY_API_KEY}"
+    # Protocol to use (project expects Anthropic-compatible messages API)
+    api: "anthropic-messages"
+    models:
+      - id: "perplexity/sonar-pro"
+        name: "Claude Sonnet 4.5"
+        reasoning: true
+        input:
+          - text
+          - image
+        contextWindow: 200000
+        maxTokens: 4096
+
+# Example usage / validation:
+# 1) export OPENCLAW_PERPLEXITY_API_KEY="pplx-..."
+# 2) run your OpenClaw service which will read this file by default from
+#    the repository root `.openclaw/config.yaml`.
+
+# If you prefer an env-only setup, omit `apiKey` and rely on env vars only.
+
+agents:
+  defaults:
+    model:
+      primary: "perplexity/sonar-pro"
